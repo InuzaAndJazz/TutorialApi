@@ -38,4 +38,16 @@ public class UserController {
 			return "ERROR: El usuario no se encuentra registrado";
 		}
 	}
+
+	@PostMapping("/user/requestResetPassword")
+	@ResponseBody
+	public String solicitudReinicioPassword(@RequestParam String email) {
+		if (usuarios.containsKey(email)) {
+			String codigoReinicio = Math.round(Math.random()*9999)+"";
+			codigosDeReinicio.put(email, codigoReinicio);
+			return "OK: Codigo de reinicio de password enviado"+"(Simulacion codigo="+codigoReinicio+")";
+		} else {
+			return "ERROR: Direccion de correo no encontrada";
+		}
+	}
 }
