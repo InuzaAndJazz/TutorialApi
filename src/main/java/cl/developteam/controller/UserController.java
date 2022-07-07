@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class UserController {
 
 	private static Map<String, String> usuarios = new HashMap<>();
+	private static Map<String, String> codigosDeReinicio = new HashMap<>();
 
 	@PostMapping("/user")
 	@ResponseBody
