@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,11 +44,30 @@ public class UserController {
 	@ResponseBody
 	public String solicitudReinicioPassword(@RequestParam String email) {
 		if (usuarios.containsKey(email)) {
-			String codigoReinicio = Math.round(Math.random()*9999)+"";
+			String codigoReinicio = Math.round(Math.random() * 9999) + "";
 			codigosDeReinicio.put(email, codigoReinicio);
-			return "OK: Codigo de reinicio de password enviado"+"(Simulacion codigo="+codigoReinicio+")";
+			return "OK: Codigo de reinicio de password enviado" + "(Simulacion codigo=" + codigoReinicio + ")";
 		} else {
 			return "ERROR: Direccion de correo no encontrada";
 		}
 	}
+
+	@PatchMapping("/user/resetPassword")
+	@ResponseBody
+	public String Reinicio(@RequestParam String email, @RequestParam String newPassword, @RequestParam String codigo) {
+		if (usuarios.containsKey(email)) {
+
+			if (codigo.equals(codigosDeReinicio.get(email))) {
+				usuarios.replace(email, newPassword);
+				return "OK: Contraseña modificada";
+			} else {
+				return "ERROR: El codigo de reinicio no es correcto";
+			}
+
+		} else {
+			return "ERROR: email no esta registrado";
+		}
+
+	}
+
 }
