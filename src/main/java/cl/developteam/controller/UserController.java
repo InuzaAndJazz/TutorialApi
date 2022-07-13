@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,4 +55,20 @@ public class UserController {
 			return "ERROR: Direccion de correo no encontrada";
 		}
 	}
+	
+	@PatchMapping("/user/changePassword")
+	@ResponseBody
+	public String cambioPassword(@RequestParam String email, @RequestParam String password, @RequestParam String newPassword) {
+		if (usuarios.containsKey(email)) {
+			if (usuarios.get(email).equals(password)) {
+				usuarios.replace(email, password, newPassword);
+				return "OK: Contraseña cambiada con éxito.";
+			} else {
+				return "ERROR: Usuario o contraseña incorrectos.";
+			}
+		} else {
+			return "ERROR: Usuario no existente.";
+		}
+	}
+
 }
