@@ -45,8 +45,12 @@ public class UserController {
 	public String solicitudReinicioPassword(@RequestParam String email) {
 		if (usuarios.containsKey(email)) {
 			String codigoReinicio = Math.round(Math.random() * 9999) + "";
+			while (codigoReinicio.length() != 4) {
+				codigoReinicio = Math.round(Math.random() * 9999) + "";
+			}
 			codigosDeReinicio.put(email, codigoReinicio);
 			return "OK: Codigo de reinicio de password enviado" + "(Simulacion codigo=" + codigoReinicio + ")";
+
 		} else {
 			return "ERROR: Direccion de correo no encontrada";
 		}
@@ -67,7 +71,22 @@ public class UserController {
 		} else {
 			return "ERROR: email no esta registrado";
 		}
+	}
 
+	@PatchMapping("/user/changePassword")
+	@ResponseBody
+	public String cambioPassword(@RequestParam String email, @RequestParam String password,
+			@RequestParam String newPassword) {
+		if (usuarios.containsKey(email)) {
+			if (usuarios.get(email).equals(password)) {
+				usuarios.replace(email, password, newPassword);
+				return "OK: Contraseña cambiada con éxito.";
+			} else {
+				return "ERROR: Usuario o contraseña incorrectos.";
+			}
+		} else {
+			return "ERROR: Usuario no existente.";
+		}
 	}
 
 }
