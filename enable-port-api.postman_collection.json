@@ -1,0 +1,172 @@
+{
+	"info": {
+		"_postman_id": "180dd2e7-a1a9-40ae-ba3e-c178e9b501bb",
+		"name": "enable-port-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6253995"
+	},
+	"item": [
+		{
+			"name": "Registro de usuarios",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/user?email=j.pablo1621@gmail.com&password=123123",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "j.pablo1621@gmail.com"
+						},
+						{
+							"key": "password",
+							"value": "123123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/user/login?email=j.pablo1621@gmail.com&password=123121",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"login"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "j.pablo1621@gmail.com"
+						},
+						{
+							"key": "password",
+							"value": "123121"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cambio de contraseña",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/user/changePassword?email=j.pablo1621@gmail.com&password=123123&newPassword=asdasd",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"changePassword"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "j.pablo1621@gmail.com"
+						},
+						{
+							"key": "password",
+							"value": "123123"
+						},
+						{
+							"key": "newPassword",
+							"value": "asdasd"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Solicitar codigo para reinicio de contraseña",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/user/requestResetPassword?email=j.pablo1621@gmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"requestResetPassword"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "j.pablo1621@gmail.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reiniciar contraseña",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/user/resetPassword?email=j.pablo1621@gmail.com&newPassword=asdasd&codigo=1234",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"resetPassword"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "j.pablo1621@gmail.com"
+						},
+						{
+							"key": "newPassword",
+							"value": "asdasd"
+						},
+						{
+							"key": "codigo",
+							"value": "1234"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
