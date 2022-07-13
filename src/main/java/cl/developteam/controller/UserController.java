@@ -55,10 +55,28 @@ public class UserController {
 			return "ERROR: Direccion de correo no encontrada";
 		}
 	}
-	
+
+	@PatchMapping("/user/resetPassword")
+	@ResponseBody
+	public String Reinicio(@RequestParam String email, @RequestParam String newPassword, @RequestParam String codigo) {
+		if (usuarios.containsKey(email)) {
+
+			if (codigo.equals(codigosDeReinicio.get(email))) {
+				usuarios.replace(email, newPassword);
+				return "OK: Contraseña modificada";
+			} else {
+				return "ERROR: El codigo de reinicio no es correcto";
+			}
+
+		} else {
+			return "ERROR: email no esta registrado";
+		}
+	}
+
 	@PatchMapping("/user/changePassword")
 	@ResponseBody
-	public String cambioPassword(@RequestParam String email, @RequestParam String password, @RequestParam String newPassword) {
+	public String cambioPassword(@RequestParam String email, @RequestParam String password,
+			@RequestParam String newPassword) {
 		if (usuarios.containsKey(email)) {
 			if (usuarios.get(email).equals(password)) {
 				usuarios.replace(email, password, newPassword);
