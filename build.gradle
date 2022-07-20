@@ -32,6 +32,8 @@ dependencies {
 
     
     testImplementation 'junit:junit:4.12'
+    
+	implementation group: 'org.postgresql', name: 'postgresql', version: '42.4.0'
 }
 
 application {
