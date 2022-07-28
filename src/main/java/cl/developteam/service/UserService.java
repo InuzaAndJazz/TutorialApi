@@ -60,11 +60,13 @@ public class UserService {
 		}
 	}
 
-	public String requestResetPassword(String email, String newPassword, String codigo) throws SQLException {
-		String existingPassword = userRepository.getPasswordByEmail(email);
-		if (existingPassword != null) {
+	public String resetPassword(String email, String newPassword, String codigo) throws SQLException {
+		User existingUser = userRepository.findByEmail(email);
+		if (existingUser != null) {
 			if (codigo.equals(codigosDeReinicio.get(email))) {
-//				userRepository.updateUser(email, newPassword);
+				existingUser.setPassword(newPassword);
+
+				userRepository.save(existingUser);
 				return "OK: Contraseña modificada";
 			} else {
 				return "ERROR: El codigo de reinicio no es correcto";
@@ -76,10 +78,12 @@ public class UserService {
 	}
 
 	public String changePassword(String email, String password, String newPassword) throws SQLException {
-		String existingPassword = userRepository.getPasswordByEmail(email);
-		if (existingPassword != null) {
-			if (existingPassword.equals(password)) {
-//				userRepository.updateUser(email, newPassword);
+		User user = userRepository.findByEmail(email);
+		if (user != null) {
+			if (password.equals(user.getPassword())) {
+				user.setPassword(newPassword);
+
+				userRepository.save(user);
 				return "OK: Contraseña cambiada con éxito.";
 			} else {
 				return "ERROR: Usuario o contraseña incorrectos.";
