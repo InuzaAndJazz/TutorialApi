@@ -33,9 +33,9 @@ public class UserService {
 	}
 
 	public String userLogin(String email, String password) throws SQLException {
-		String existingPassword = userRepository.getPasswordByEmail(email);
-		if (existingPassword != null) {
-			if (existingPassword.equals(password)) {
+		User existingUser = userRepository.findByEmail(email);
+		if (existingUser != null) {
+			if (existingUser.getPassword().equals(password)) {
 				return "OK: Login exitoso";
 			} else {
 				return "ERROR: Password incorrecta";
@@ -46,8 +46,8 @@ public class UserService {
 	}
 
 	public String requestResetPassword(String email) throws SQLException {
-		String existingPassword = userRepository.getPasswordByEmail(email);
-		if (existingPassword != null) {
+		User existingUser = userRepository.findByEmail(email);
+		if (existingUser != null) {
 			String codigoReinicio = Math.round(Math.random() * 9999) + "";
 			while (codigoReinicio.length() != 4) {
 				codigoReinicio = Math.round(Math.random() * 9999) + "";
