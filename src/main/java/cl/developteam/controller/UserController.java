@@ -23,28 +23,28 @@ public class UserController {
 		return userService.createUser(email, password);
 	}
 
-	@PostMapping("/user/login")
-	@ResponseBody
-	public String loginDeUsuario(@RequestParam String email, @RequestParam String password) throws SQLException {
-		return userService.userLogin(email, password);
-	}
-
-	@PostMapping("/user/requestResetPassword")
-	@ResponseBody
-	public String solicitudReinicioPassword(@RequestParam String email) throws SQLException {
-		return userService.requestResetPassword(email);
-	}
-
-	@PatchMapping("/user/resetPassword")
-	@ResponseBody
-	public String reinicio(@RequestParam String email, @RequestParam String newPassword, @RequestParam String codigo) throws SQLException {
-		return userService.requestResetPassword(email, newPassword, codigo);
-	}
-
-	@PatchMapping("/user/changePassword")
-	@ResponseBody
-	public String cambioPassword(@RequestParam String email, @RequestParam String password, @RequestParam String newPassword) throws SQLException {
-		return userService.changePassword(email, password, newPassword);
-	}
+//	@PostMapping("/user/login")
+//	@ResponseBody
+//	public String loginDeUsuario(@RequestParam String email, @RequestParam String password) throws SQLException {
+//		return userService.userLogin(email, password);
+//	}
+//
+//	@PostMapping("/user/requestResetPassword")
+//	@ResponseBody
+//	public String solicitudReinicioPassword(@RequestParam String email) throws SQLException {
+//		return userService.requestResetPassword(email);
+//	}
+//
+//	@PatchMapping("/user/resetPassword")
+//	@ResponseBody
+//	public String reinicio(@RequestParam String email, @RequestParam String newPassword, @RequestParam String codigo) throws SQLException {
+//		return userService.requestResetPassword(email, newPassword, codigo);
+//	}
+//
+//	@PatchMapping("/user/changePassword")
+//	@ResponseBody
+//	public String cambioPassword(@RequestParam String email, @RequestParam String password, @RequestParam String newPassword) throws SQLException {
+//		return userService.changePassword(email, password, newPassword);
+//	}
 
 }
